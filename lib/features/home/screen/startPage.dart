@@ -1,4 +1,5 @@
 import 'package:alemeno/core/dimensions.dart';
+import 'package:alemeno/core/providers.dart';
 import 'package:alemeno/core/responsive_text.dart';
 import 'package:alemeno/features/home/controller/HomeController.dart';
 import 'package:alemeno/features/home/screen/cart.dart';
@@ -17,7 +18,7 @@ class _StartPageState extends ConsumerState<StartPage> {
   @override
   Widget build(BuildContext context) {
     final populars = ref.watch(getPopularProvider);
-    bool badge = false;
+    
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -32,7 +33,7 @@ class _StartPageState extends ConsumerState<StartPage> {
               padding: EdgeInsets.only(
                   right: MediaQuery.of(context).size.width / wid(context, 10)),
               child: Badge(
-                isLabelVisible: badge,
+                isLabelVisible: ref.watch(totalProvider.notifier).state != 0?true:false,
                 child: IconButton(
                     onPressed: () {
                       Navigator.push(context,
